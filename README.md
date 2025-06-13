@@ -1,6 +1,7 @@
 # QuantyBT 🪐
 
-**A framework for quantitative backtesting and portfolio optimization, based on [vectorbt](https://github.com/polakowo/vectorbt). Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader.**  
+**A framework for quantitative backtesting and portfolio optimization. Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader. Combines the flexibility of Python with the performance of Rust to deliver fast and reliable backtests**
+
 ---
 
 ## Current Models
@@ -10,8 +11,8 @@
 - **Strategy**  
   Abstract base class for building custom trading strategies with modular signal and parameter structure.
 
-- **Analyzer**  
-  Simple `vectorbt`-based backtester. Outputs full performance metrics, equity curves, drawdown charts, and summary stats with minimal config.
+- **Analyzer**    
+  Simple Python-based backtester that leverages Rust for performance-critical loops. Outputs full performance metrics, equity curves, drawdown charts, and summary stats with minimal configuration.
 
 - **AdvancedOptimizer**  
   The most comprehensive model in this project so far, a modified Walkforward Optimizer that supports both **rolling** and **anchored** validation schemes. It integrates **Bayesian Optimization** via [Hyperopt](https://github.com/hyperopt/hyperopt) for efficient hyperparameter search 
@@ -221,9 +222,9 @@ fig.show()
 
 
 - **`analyzer`**: The already defined analyzer instance, as shown above.
-- **`n_sims`**: Total number of simulations. Due to much higher computational costs start with 100-200 simulations
+- **`n_sims`**: Total number of simulations. Due to much higher computational costs start with 300-500 simulations
 
-The smaller the p-value, the less likely it is that the strategy’s performance is due to chance. Formally, the null hypothesis states: "The strategy has no genuine edge, its performance could be replicated on a randomly permuted price series"
+The smaller the p-value, the less likely it is that the strategy’s performance is due to chance. The null hypothesis states: "The strategy has no genuine edge, its performance could be replicated on a randomly permuted price series"
 
 ```python
 from quantybt.montecarlo import Permutation
