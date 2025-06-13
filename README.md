@@ -249,7 +249,7 @@ Use the .export_trades() function from your defined `Analyzer` classes and their
 
 ```python
 
-from quantybt.poerfolio.correlation import CorrelationAnalyzer
+from quantybt.portfolio.correlation import CorrelationAnalyzer
 
 trade_sources = {
     'BTC_01': {'trades': r'',
