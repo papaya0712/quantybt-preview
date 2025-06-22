@@ -1,5 +1,7 @@
 # QuantyBT 🪐
 
+## For full access, please reach out to me so I can add you to the repository.
+
 **A framework for quantitative backtesting and portfolio optimization. Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader. Combines the flexibility of Python with the performance of Rust to deliver fast and reliable backtests**
 
 ---
@@ -237,8 +239,10 @@ pt.plot(ptr)
 ```
 ```text
 Running Permutation Test…
-Backtesting Permutations: 100%|██████████| 500/500 [13:43<00:00,  2.32s/it] 
-MCPT P-Value: 0.0050  
+Permutations done: 100%|██████████| 250/250 [12:57<00:00,  3.11s/it]
+
+Sharpe p-value: 0.0040
+Sortino p-value: 0.0040
 ```
 ![Backtest Plot](imgs/img_perm.png)
 
