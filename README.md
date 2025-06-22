@@ -429,7 +429,7 @@ SOL_04    0.00    0.04    1.00
 
 
 ---
-# Portfolio Simulation - EqualWeightPortfolio
+## Portfolio Simulation - EqualWeightPortfolio
 
 ```python
 ewp = EqualWeightedPortfolio(trade_sources=trade_sources,
@@ -439,51 +439,41 @@ ewp = EqualWeightedPortfolio(trade_sources=trade_sources,
                              )
 
 results_ewp = ewp.run(freq='1d')
-display(results_ewp)
+print(results_ewp)
+ewp.plot()
 
 ```
 ```text
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+                         Value
+total_return_pct        544.34
+AnnualizedReturn_pct     96.47
+max_drawdown_pct          6.24
+Sharpe                    2.86
+Sortino                   4.11
+Calmar                    6.26
+CVaR_95_pct               2.49
+Empirical_CVaR_95_pct     0.03
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+```
+![Backtest Plot](imgs/img_ewp.png)
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>total_return_pct</th>
-      <th>AnnualizedReturn_pct</th>
-      <th>max_drawdown_pct</th>
-      <th>Sharpe</th>
-      <th>Sortino</th>
-      <th>Calmar</th>
-      <th>CVaR_95_pct</th>
-      <th>Empirical_CVaR_95_pct</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>544.34</td>
-      <td>96.47</td>
-      <td>6.24</td>
-      <td>2.86</td>
-      <td>4.11</td>
-      <td>6.26</td>
-      <td>2.49</td>
-      <td>0.03</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+Annual analysis is supported as well:
+
+```python
+df_yearly = ewp.run_by_year(freq='1d', kill_years=[])  # kill_years allowes you to remove single years from your analysis, usefull for strong outliers
+
+print(df_yearly)
+```
+
+
+```text
+
+
+                          2019   2022   2023   2024   2025    AVG
+portfolio_return_pct     -2.70   1.81  22.67   9.12   4.34   7.05
+portfolio_max_dd_pct      2.84   5.94   2.02   1.46   1.30   2.71
+portfolio_sortino        -0.08   0.36   5.16   3.01   3.12   2.31
+benchmark_return_pct    -23.64 -65.33 154.75 111.50   8.55  37.17
+benchmark_max_dd_pct     29.70  66.94  20.01  26.26  28.10  34.20
+benchmark_sortino        -2.78  -1.24   2.91   1.93   0.69   0.30
 ```
