@@ -271,20 +271,12 @@ trade_sources = {
     'BTC_02': {'trades': r'',
                        'df': r""},
 
-    'ETH_03': {'trades': r'',
+    'ETH_02': {'trades': r'',
                        'df': r""},
 
-    'SOL_04': {'trades': r'',
+    'SOL_03': {'trades': r'',
                        'df': r""},
 
-    'SOL_05': {'trades': r'',
-                       'df': r""},
-
-    'DOT_06': {'trades': r'',
-                       'df': r""},
-
-    'AVAX_07': {'trades': r'',
-                        'df': r""},
 }
 
 compounding_flags = {
