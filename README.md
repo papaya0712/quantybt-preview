@@ -201,9 +201,8 @@ analyzer.export(directory=r"C:\Desktop\quantybt\records", name="01_BTC_1_records
 ```
 Trades exported to: C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather
 ```
+
 ---
-
-
 ## Montecarlo Simulation - Bootstrapping
 
 - **`analyzer`**: The already defined analyzer instance, as shown above
@@ -230,7 +229,7 @@ bt.plot(btr)
 ```
 ![Backtest Plot](imgs/img_bt.png)
 
-
+---
 ## Montecarlo Simulation - Permutation
 
 - **`analyzer`**: The already defined analyzer instance, as shown above.
@@ -254,6 +253,7 @@ Sortino p-value: 0.0040
 ```
 ![Backtest Plot](imgs/img_perm.png)
 
+---
 ## Strategy Optimization - AdvancedOptimizer
 
 While most Puplic frameworks do not even support robust parameter optimization and if they do, then only simple train-test splits which are prone to overfitting, this framework offers a more advanced option when it comes to optimizing your parameters without overfitting your system.
@@ -383,9 +383,7 @@ print(f"Original Sharpe: {orig_sharpe:.4f} | p-value: {p_val:.4f}")
 Original Sharpe: 1.6043 | p-value: 0.0100
 ```
 
-
-
-
+---
 ## Portfolio Simulation - CorrelationAnalyzer   
 
 Use the .export_trades() function from your defined `Analyzer` classes, along with their corresponding benchmark time series, to analyze your portfolio’s correlations and tail risks.
@@ -428,3 +426,64 @@ SOL_04    0.00    0.04    1.00
 
 ```
 ![Backtest Plot](imgs/img_corr.png)
+
+
+---
+# Portfolio Simulation - EqualWeightPortfolio
+
+```python
+ewp = EqualWeightedPortfolio(trade_sources=trade_sources,
+                             compounding=False, 
+                             benchmark_path=r"C:\Desktop\quantybt\data\BTCUSDT_1d.feather",
+                             benchmark_compounding=True,
+                             )
+
+results_ewp = ewp.run(freq='1d')
+display(results_ewp)
+
+```
+```text
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_return_pct</th>
+      <th>AnnualizedReturn_pct</th>
+      <th>max_drawdown_pct</th>
+      <th>Sharpe</th>
+      <th>Sortino</th>
+      <th>Calmar</th>
+      <th>CVaR_95_pct</th>
+      <th>Empirical_CVaR_95_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>544.34</td>
+      <td>96.47</td>
+      <td>6.24</td>
+      <td>2.86</td>
+      <td>4.11</td>
+      <td>6.26</td>
+      <td>2.49</td>
+      <td>0.03</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+```
