@@ -193,8 +193,14 @@ Time in Market [%]            36.54
 
 ```
 ![Backtest Plot](imgs/img_ana.png)
-
+```
+for exporting your trade records:
+```
+```python
+analyzer.export(directory=r"C:\Desktop\quantybt\records", name="01_BTC_1_records")
+```
 ---
+
 
 ## Montecarlo Simulation - Bootstrapping
 
@@ -252,31 +258,23 @@ Sortino p-value: 0.0040
 Use the .export_trades() function from your defined `Analyzer` classes and their original benchmark time series to analyze your portfolio's correlation and **tail risks**.
 
 
+
+
 ```python
 
 from quantybt.portfolio.correlation import CorrelationAnalyzer
 
+
 trade_sources = {
-    'BTC_01': {'trades': r'',
-                       'df': r""},
+     'BTC_01': {'trades': r'C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather',
+                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\BTCUSDT_15m.feather"},
 
-    'ETH_02': {'trades': r'',
-                       'df': r""},
+     'ETH_02': {'trades': r'C:\Users\nikla\Desktop\project2\records\03_ETH_1_records_trades.feather',
+                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\ETHUSDT_15m.feather"},
 
-    'SOL_03': {'trades': r'',
-                       'df': r""},
-
-}
-
-compounding_flags = {
-    'BTC_01': False,
-    'BTC_02': False,
-    'ETH_03': False,
-    'SOL_04': False,
-    'SOL_05': False,
-    'DOT_06': False,
-    'AVAX_07': False,
-}
+     'SOL_03': {'trades': r'C:\Users\nikla\Desktop\project2\records\04_SOL_1_records_trades.feather',
+                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\SOLUSDT_1h.feather"},
+                       }
 
 sca = CorrelationAnalyzer(trade_sources=trade_sources, compounding_flags=compounding_flags)
 
