@@ -1,5 +1,6 @@
 
 .qbt_preview_venv/
+.qbt_preview_venv
 
 __pycache__/
 *.py[cod]
