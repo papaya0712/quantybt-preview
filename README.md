@@ -230,9 +230,8 @@ fig.show()
 
 ## Montecarlo Simulation - Permutation
 
-
 - **`analyzer`**: The already defined analyzer instance, as shown above.
-- **`n_sims`**: Total number of simulations. Due to much higher computational costs start with 300-500 simulations
+- **`n_sims`**: Total number of simulations. Due to much higher computational costs aim for at least 500 simulations
 
 The smaller the p-value, the less likely it is that the strategy’s performance is due to chance. The null hypothesis states: "The strategy has no genuine edge, its performance could be replicated on a randomly permuted price series"
 
