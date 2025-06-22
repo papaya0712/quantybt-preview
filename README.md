@@ -457,10 +457,22 @@ Empirical_CVaR_95_pct     0.03
 ```
 ![Backtest Plot](imgs/img_ewp.png)
 
-Annual analysis is supported as well:
+These results highlight key patterns in the portfolio’s behavior:
 
-Params:
-- `remove_years` Optional list that allowes you to remove years from your analysis, usefull when having strong outliers
+1. Rapid portfolio growth during the 2020–2021 bull market.
+2. Two distinct short-term drawdown spikes:  
+   – April 2020 (COVID-19 crash)  
+   – June 2022 (Terra-Luna collapse)
+
+Both events are explainable in the context of broader market disruptions.  
+In April 2020, Bitcoin dropped nearly 50% within days due to the global COVID-19 shock.  
+In June 2022, the collapse of the Terra-Luna ecosystem triggered widespread deleveraging and panic across the crypto market.
+
+Despite these events, the portfolio recovered rapidly, underlining its resilience and structural robustness.
+
+But what if our portfolio only did so well because of the early top performance back in 2020-2021 ? 
+For that it is important to remove those outlier years, no one wants to trade a portfolio which did only because of one historical year well.
+For that we can use another function from our `EqualWeightPortfolio`, the `.run_by_year()` function which shows us annual metrics for each year compared to our benchmark asset.  
 
 ```python
 df_yearly = ewp.run_by_year(freq='1d', remove_years=[])  
