@@ -193,11 +193,13 @@ Time in Market [%]            36.54
 
 ```
 ![Backtest Plot](imgs/img_ana.png)
-```
-for exporting your trade records:
-```
+
+export your trade records:
 ```python
 analyzer.export(directory=r"C:\Desktop\quantybt\records", name="01_BTC_1_records")
+```
+````
+Trades exported to: C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather
 ```
 ---
 
