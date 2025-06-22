@@ -190,7 +190,7 @@ Time in Market [%]            36.54
 
 
 ```
-![Backtest Plot](imgs\img_ana.png)
+![Backtest Plot](imgs/img_ana.png)
 
 ---
 
