@@ -355,6 +355,11 @@ Time in Market [%]          27.81
 
 Bootstrap 95% CI (Sharpe): [-1.1803, 2.8621]
 
+=== Fold 2 – In-Sample ===
+
+...
+
+
 ```
 
 ![WFO-plot](imgs/img_wfo.png)
