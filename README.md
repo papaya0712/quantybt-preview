@@ -203,12 +203,11 @@ Time in Market [%]            36.54
 Note: standard bootstrapping methods destroy the autocorrelation structure of ur return series
 
 ```python
-from quantybt.montecarlo import Bootstrapping
+from quantybt.strategy.montecarlo import Bootstrapping
 
-mc = Bootstrapping(analyzer=analyzer, n_sims=10000, batch_size=500)
-
-mc_results = mc.results()
-print(mc_results)
+bt = Bootstrapping(analyzer, n_sims=10000, batch_size=1000)
+btr = bt.run()
+bt.plot(btr)
 
 ```
 ```text
@@ -219,13 +218,7 @@ print(mc_results)
             Calmar: p-value = 0.03820 | benchmark = 0.7370 | sim_mean = 2.6505
        MaxDrawdown: p-value = 0.00040 | benchmark = -0.772 | sim_mean = -0.3299       
 ```
-
-```python
-fig = mc.plot_histograms(mc_results)
-fig.show()
-
-```
-![Backtest Plot](img/mc_plt.png)
+![Backtest Plot](imgs/img_bt.png)
 
 
 ## Montecarlo Simulation - Permutation
