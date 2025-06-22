@@ -198,7 +198,7 @@ export your trade records:
 ```python
 analyzer.export(directory=r"C:\Desktop\quantybt\records", name="01_BTC_1_records")
 ```
-````
+```
 Trades exported to: C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather
 ```
 ---
