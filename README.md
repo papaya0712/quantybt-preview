@@ -257,43 +257,42 @@ Sortino p-value: 0.0040
 
 ## Portfolio Simulation - CorrelationAnalyzer   
 
-Use the .export_trades() function from your defined `Analyzer` classes and their original benchmark time series to analyze your portfolio's correlation and **tail risks**.
+Use the .export_trades() function from your defined `Analyzer` classes, along with their corresponding benchmark time series, to analyze your portfolio’s correlations and tail risks.
 
-
-
+Note: The CorrelationAnalyzer plots arithmetic equity curves (i.e. without compounding effects), which do not affect the computed correlations.
 
 ```python
 
 from quantybt.portfolio.correlation import CorrelationAnalyzer
 
-
 trade_sources = {
-     'BTC_01': {'trades': r'C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather',
-                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\BTCUSDT_15m.feather"},
+    'BTC_01': {
+        'trades': r'C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather',
+        'df': r'C:\Desktop\quantybt\data\BTCUSDT_15m.feather'
+    },
+    'ETH_02': {
+        'trades': r'C:\Desktop\quantybt\records\03_ETH_1_records_trades.feather',
+        'df': r'C:\Desktop\quantybt\data\ETHUSDT_15m.feather'
+    },
+    'SOL_03': {
+        'trades': r'C:\Desktop\quantybt\records\04_SOL_1_records_trades.feather',
+        'df': r'C:\Desktop\quantybt\data\SOLUSDT_1h.feather'
+    }
+}
 
-     'ETH_02': {'trades': r'C:\Users\nikla\Desktop\project2\records\03_ETH_1_records_trades.feather',
-                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\ETHUSDT_15m.feather"},
-
-     'SOL_03': {'trades': r'C:\Users\nikla\Desktop\project2\records\04_SOL_1_records_trades.feather',
-                       'df': r"C:\Users\nikla\Desktop\project2\data_ccxt\SOLUSDT_1h.feather"},
-                       }
-
-sca = CorrelationAnalyzer(trade_sources=trade_sources, compounding_flags=compounding_flags)
-
+sca = CorrelationAnalyzer(trade_sources=trade_sources)
 results_sca = sca.run()
+print(results_sca["pearson_corr_active"])
+
 
 ```
 ```text
-Loaded 7 strategyies: ['BTC_01', 'BTC_02', 'ETH_03', 'SOL_04', 'SOL_05', 'DOT_06', 'AVAX_07']
+Loaded 3 strategies: ['BTC_01', 'ETH_02', 'SOL_03']
           
-          BTC_01  BTC_02  ETH_03  SOL_04  SOL_05  DOT_06  AVAX_07
- BTC_01     1.00    0.02    0.26   -0.02    0.01    0.01    -0.01
- BTC_02     0.02    1.00    0.04    0.11   -0.06   -0.10    -0.05
- ETH_03     0.26    0.04    1.00    0.01    0.04   -0.00    -0.02
- SOL_04    -0.02    0.11    0.01    1.00    0.07   -0.04    -0.02
- SOL_05     0.01   -0.06    0.04    0.07    1.00    0.17     0.15
- DOT_06     0.01   -0.10   -0.00   -0.04    0.17    1.00     0.25
- AVAX_07   -0.01   -0.05   -0.02   -0.02    0.15    0.25     1.00
+        BTC_01  ETH_03  SOL_04
+BTC_01    1.00    0.08    0.00
+ETH_03    0.08    1.00    0.04
+SOL_04    0.00    0.04    1.00
 
 ```
-![Backtest Plot](img/corr_analyzer.png)
+![Backtest Plot](img/img_corr.png)
