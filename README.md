@@ -489,3 +489,15 @@ benchmark_return_pct    -23.64 -65.33 154.75 111.50   8.55  37.17
 benchmark_max_dd_pct     29.70  66.94  20.01  26.26  28.10  34.20
 benchmark_sortino        -2.78  -1.24   2.91   1.93   0.69   0.30
 ```
+
+After excluding the extreme bull market years 2020 and 2021, we obtain a more realistic picture of portfolio performance under typical market conditions:
+
+- **Annualized Return:** ~7.05%  
+- **Max Drawdown:** ~2.7%  
+- **Sortino Ratio:** ~2.3
+
+In comparison, Bitcoin's historical annual return ranges from ~37% to 70%, but this comes with an average max drawdown between 35% and 40%. Our portfolio exhibits significantly lower downside risk, achieving similar or superior risk-adjusted returns.
+
+This implies a much higher efficiency per unit of risk taken. While absolute returns may appear lower, the drawdown profile allows for the use of **moderate leverage** without exposing the portfolio to the extreme tail risks typical for unhedged crypto holdings.
+
+Assuming linear growth and no compounding, both return and drawdown scale proportionally with leverage, enabling controlled amplification of performance under risk-aware constraints.
