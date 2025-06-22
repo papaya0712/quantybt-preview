@@ -459,15 +459,27 @@ Empirical_CVaR_95_pct     0.03
 
 Annual analysis is supported as well:
 
-```python
-df_yearly = ewp.run_by_year(freq='1d', kill_years=[])  # kill_years allowes you to remove single years from your analysis, usefull for strong outliers
+Params:
+- `remove_years` Optional list that allowes you to remove years from your analysis, usefull when having strong outliers
 
+```python
+df_yearly = ewp.run_by_year(freq='1d', remove_years=[])  
 print(df_yearly)
+
 ```
 
-
 ```text
+                          2019    2020    2021    2022    2023    2024   2025    AVG
+portfolio_return_pct     -2.70  107.18  115.09    1.81   22.67    9.12   4.34  36.79
+portfolio_max_dd_pct      2.84    6.24    3.38    5.94    2.02    1.46   1.30   3.31
+portfolio_sortino        -0.08    4.11    7.64    0.36    5.16    3.01   3.12   3.33
+benchmark_return_pct    -23.64  302.24   57.52  -65.33  154.75  111.50   8.55  77.94
+benchmark_max_dd_pct     29.70   54.00   53.22   66.94   20.01   26.26  28.10  39.75
+benchmark_sortino        -2.78    2.05    1.03   -1.24    2.91    1.93   0.69   0.66
 
+```
+after removing:
+```text
 
                           2019   2022   2023   2024   2025    AVG
 portfolio_return_pct     -2.70   1.81  22.67   9.12   4.34   7.05
