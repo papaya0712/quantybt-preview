@@ -254,6 +254,132 @@ Sortino p-value: 0.0040
 ```
 ![Backtest Plot](imgs/img_perm.png)
 
+## Strategy Optimization - AdvancedOptimizer
+
+While most Puplik frameworks do not even support robust parameter optimization and if they do, then only simple train-test splits which are prone to overfitting, this framework offers a more advanced option when it comes to optimizing your parameters without overfitting your system.
+
+Key components:
+
+1. standard rolling-wfo engine
+2. optional warmup between all folds
+3. generalization loss penalty term
+3. bootstrapping per oos fold for a empircial confidence interval of the sharpe-ratio
+3. optional permutation test on aggregated oos-folds, which optimizes the parameters on each of the n-synthetic paths
+and then compares them with the original sortino-ratio
+
+```python
+from quantybt.strategy.optimizer import AdvancedOptimizer, WFOSplitCfg, PlotWFOSummary
+
+wfo = AdvancedOptimizer(
+    analyzer         = analyzer,                # Instance of your Analyzer class
+    max_warmup       = 700,                     # Number of warm-up candles between folds (prevents data leakage)
+    timeframe        = '1h',                    # Timeframe for the Sharpe computation
+    max_evals        = 500,                     # Number of parameter combinations tested during optimization
+    target_metric    = 'Sharpe',                # Optimization target metric ('Sharpe', 'Sortino', etc.)
+    beta             = 0.2,                     # Weighting factor for the generalization loss penalty
+    split_cfgs       = WFOSplitCfg(
+                          mode='rolling',
+                          train_period='24ME',  # 24 months effective (resampled) training data
+                          test_period='12ME'    # 12 months for out-of-sample validation
+                      ),
+    bootstrap_sims   = 3000,                    # Number of bootstrap simulations per OOS fold
+    bootstrap_batch  = 1000,                    # Simulations per batch (memory/performance control)
+    bootstrap_seed   = 69,                      # Seed for reproducibility
+    verbose          = True                     # Enable verbose logging of fold-level results
+)
+
+
+best_params, trials = wfo.optimize()
+results = wfo.evaluate()
+print("Best Parameter:", best_params)
+
+plotter = PlotWFOSummary(optimizer=wfo)
+fig = plotter.plot("Walk-Forward Equity Curves")
+fig.show()
+
+```
+It will output the backtest results for each IS- and OOS fold:
+
+```text
+100%|██████████| 500/500 [15:35<00:00,  3.62s/trial, best loss: -1.4039336492890995]
+
+=== Fold 1 – In-Sample ===
+                             Value
+CAGR Strategy [%]           122.52
+CAGR Benchmark [%]          141.59
+Total Return Strategy [%]   338.85
+Total Return Benchmark [%]  410.92
+Max Drawdown Strategy [%]   -20.38
+Max Drawdown Benchmark [%]  -54.92
+Volatility [%]               42.17
+Sharpe                        2.11
+Sortino                       2.98
+Calmar                        6.01
+Profit Factor                 2.56
+Win Rate [%]                 44.44
+Avg Win [%]                   5.89
+Avg Loss [%]                 -1.84
+Best Trade [%]               27.98
+Worst Trade [%]              -8.58
+Total Trades                108.00
+Max Consecutive Wins          4.00
+Max Consecutive Losses        5.00
+Full Kelly                    0.27
+Correlation to Benchmark      0.54
+Time in Market [%]           32.75
+
+=== Fold 1 – Out-of-Sample ===
+                            Value
+CAGR Strategy [%]           18.45
+CAGR Benchmark [%]         -40.28
+Total Return Strategy [%]   18.17
+Total Return Benchmark [%] -39.86
+Max Drawdown Strategy [%]  -25.24
+Max Drawdown Benchmark [%] -67.49
+Volatility [%]              25.91
+Sharpe                       0.78
+Sortino                      1.11
+Calmar                       0.73
+Profit Factor                1.53
+Win Rate [%]                28.57
+Avg Win [%]                  5.58
+Avg Loss [%]                -1.46
+Best Trade [%]              25.04
+Worst Trade [%]             -7.51
+Total Trades                42.00
+Max Consecutive Wins         1.00
+Max Consecutive Losses       5.00
+Full Kelly                   0.10
+Correlation to Benchmark     0.43
+Time in Market [%]          27.81
+
+Bootstrap 95% CI (Sharpe): [-1.1803, 2.8621]
+
+```
+
+![WFO-plot](imgs/img_wfo.png)
+
+
+The optional but strongly recommended permutation function:
+
+```python
+oos_returns = wfo.get_oos_returns()
+orig_sharpe, p_val, dist = wfo.permutation_test(
+    n_sims=500,
+    max_evals_per_perm=50,
+    seed=123,
+    n_jobs=-1
+    )
+
+print(f"Original Sharpe: {orig_sharpe:.4f} | p-value: {p_val:.4f}")
+
+```
+```text
+Original Sharpe: 1.6043 | p-value: 0.0100
+```
+
+
+
 
 ## Portfolio Simulation - CorrelationAnalyzer   
 
