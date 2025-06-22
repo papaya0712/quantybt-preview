@@ -229,19 +229,18 @@ bt.plot(btr)
 The smaller the p-value, the less likely it is that the strategy’s performance is due to chance. The null hypothesis states: "The strategy has no genuine edge, its performance could be replicated on a randomly permuted price series"
 
 ```python
-from quantybt.montecarlo import Permutation
+from quantybt.strategy.montecarlo import Permutation
 
-perm_tester = Permutation(analyzer=analyzer, n_sims=200)
-
-perm_results = perm_tester.run()
-perm_tester.plot(perm_results)
+pt = Permutation(analyzer, n_sims=500)
+ptr = pt.run()
+pt.plot(ptr)
 ```
 ```text
-Running MCPT Permutation Test
-Generating permutations: 100%|██████████| 200/200 [00:31<00:00,  6.36it/s]
-Backtesting Permutations: 100%|██████████| 200/200 [07:43<00:00,  2.32s/it]MCPT P-Value: 0.0050  
+Running Permutation Test…
+Backtesting Permutations: 100%|██████████| 500/500 [13:43<00:00,  2.32s/it] 
+MCPT P-Value: 0.0050  
 ```
-![Backtest Plot](img/permutation_mc_plot.png)
+![Backtest Plot](imgs/img_perm.png)
 
 
 ## Portfolio Simulation - CorrelationAnalyzer   
