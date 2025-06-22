@@ -1,6 +1,6 @@
 # QuantyBT 🪐
 
-## For full access, please reach out to me so I can add you to the orginal repository.
+## This is a preview version. For full access, please reach out to me so I can add you to the orginal repository.
 
 **A framework for quantitative backtesting and portfolio optimization. Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader. Combines the flexibility of Python with the performance of Rust to deliver fast and reliable backtests**
 
@@ -256,14 +256,14 @@ Sortino p-value: 0.0040
 
 ## Strategy Optimization - AdvancedOptimizer
 
-While most Puplik frameworks do not even support robust parameter optimization and if they do, then only simple train-test splits which are prone to overfitting, this framework offers a more advanced option when it comes to optimizing your parameters without overfitting your system.
+While most Puplic frameworks do not even support robust parameter optimization and if they do, then only simple train-test splits which are prone to overfitting, this framework offers a more advanced option when it comes to optimizing your parameters without overfitting your system.
 
 Key components:
 
 1. standard rolling-wfo engine
 2. optional warmup between all folds
 3. generalization loss penalty term
-3. bootstrapping per oos fold for a empircial confidence interval of the sharpe-ratio
+3. bootstrapping per oos fold for a empirical confidence interval of the sharpe-ratio
 3. optional permutation test on aggregated oos-folds, which optimizes the parameters on each of the n-synthetic paths
 and then compares them with the original sortino-ratio
 
@@ -417,6 +417,7 @@ print(results_sca["pearson_corr_active"])
 
 
 ```
+
 ```text
 Loaded 3 strategies: ['BTC_01', 'ETH_02', 'SOL_03']
           
