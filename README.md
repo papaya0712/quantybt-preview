@@ -295,4 +295,4 @@ ETH_03    0.08    1.00    0.04
 SOL_04    0.00    0.04    1.00
 
 ```
-![Backtest Plot](img/img_corr.png)
+![Backtest Plot](imgs/img_corr.png)
