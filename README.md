@@ -148,60 +148,57 @@ strat = YourStrategy()
 from quantybt import Analyzer
 
 analyzer = Analyzer(
-    strategy=strat,
-    params=params,
-    full_data=df,
-    timeframe='15m',
-    price_col="close",
-    init_cash=1000,
-    fees=0.0006,  # = 0.06% 
-    slippage=0,
-    trade_side='longonly',
-    sl_stop=params['sl_pct']
-)
+    strategy   = strat,
+    params     = params,
+    full_data  = df,  
+    timeframe  = '15m',
+    initial_capital=1000,
+    price_col  = 'close',   
+    fees       = 0.0002,
+    sl_stop    = params['sl_pct'])
 
-print(analyzer.backtest_results())
+print(analyzer.stats())
 
 analyzer.plot_backtest()
 ```
 
 ```text
-Metric                                             Strategy   Benchmark
 
-CAGR [%]                                              79.03     56.95
-Total Return [%]                                    2497.84   1144.35
-Max Drawdown [%]                                     -20.01    -77.27
-Annualized Volatility [%]                              34.1     66.97
-Sharpe Ratio                                           1.88      1.01
-Sortino Ratio                                           2.7      1.43
-Calmar Ratio                                           3.95       
-Profit Factor                                          1.99       
-Correlation to Benchmark                               0.51
---------------------------------           
-Alpha [%]                                             64.79       
-Beta                                                   0.26       
-Kelly [%]                                             20.96       
-Risk of Ruin_100, risk=kelly                            0.0       
-Risk of Ruin_50,  risk=kelly                           0.01                                        
-Total Trades                                            328       
-Win Rate [%]                                          37.92       
-Best Trade [%]                                        31.94       
-Worst Trade [%]                                       -5.82       
-Avg Winning Trade [%]                                  5.38       
-Avg Losing Trade [%]                                  -1.47       
-Avg Winning Trade Duration        3 days 12:48:30.483870967       
-Avg Losing Trade Duration         1 days 08:28:53.497536945
+                              Value
+CAGR Strategy [%]             92.16
+CAGR Benchmark [%]            56.03
+Total Return Strategy [%]   4046.74
+Total Return Benchmark [%]  1164.54
+Max Drawdown Strategy [%]    -21.94
+Max Drawdown Benchmark [%]   -77.27
+Volatility [%]                35.48
+Sharpe                         2.02
+Sortino                        2.91
+Calmar                         4.20
+Profit Factor                  2.54
+Win Rate [%]                  41.67
+Avg Win [%]                    5.48
+Avg Loss [%]                  -1.54
+Best Trade [%]                30.04
+Worst Trade [%]               -8.96
+Total Trades                 312.00
+Max Consecutive Wins           7.00
+Max Consecutive Losses         8.00
+Full Kelly                     0.25
+Correlation to Benchmark       0.53
+Time in Market [%]            36.54
+
 
 ```
-![Backtest Plot](img/backtest_plt.png)
+![Backtest Plot](imgs\img_ana.png)
 
 ---
 
 ## Montecarlo Simulation - Bootstrapping
 
-- **`analyzer`**: The already defined analyzer instance, as shown above. Alternatively, you can pass a return series `ret_series` and a timeframe `timeframe`.
+- **`analyzer`**: The already defined analyzer instance, as shown above
 - **`n_sims`**: Total number of simulations. Aim for at least 5,000 simulations; 10,000 is recommended.
-- **`batch_size`**: Controls how many simulations run per batch to manage memory usage. With 32 GB of RAM, I typically use a batch size of 1,000.
+- **`batch_size`**: Controls how many simulations run per batch to manage memory usage
 
 Note: standard bootstrapping methods destroy the autocorrelation structure of ur return series
 
@@ -266,9 +263,6 @@ from quantybt.portfolio.correlation import CorrelationAnalyzer
 
 trade_sources = {
     'BTC_01': {'trades': r'',
-                       'df': r""},
-
-    'BTC_02': {'trades': r'',
                        'df': r""},
 
     'ETH_02': {'trades': r'',
