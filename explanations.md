@@ -92,7 +92,16 @@ For more serious algorithmic trading you should look at more risk metrics than s
 
 ### Value at Risk (VaR)
 
-<pre> ```latex % Value at Risk (VaR) \[ \text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P \] % Conditional Value at Risk (CVaR) \[ \text{CVaR}_{\alpha} = \mathbb{E} \left[ X \,\middle|\, X \leq -\text{VaR}_{\alpha} \right] \] ``` </pre>
+$$
+\text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P
+$$
+
+Where:
+
+- $z_{\alpha}$: Quantil der Standardnormalverteilung (e.g. $z_{0.99} = 2.326$)
+- $\sigma_P$: Portfolio standard deviation (volatility)
+
+This gives the maximum expected loss over a given time period with confidence level $\alpha$. It's a threshold: under normal market conditions, losses should not exceed this level more than $(1 - \alpha)$% of the time.
 
 ### Conditional Value at Risk (CVaR)
 
@@ -100,7 +109,12 @@ $$
 \text{CVaR}_{\alpha} = \mathbb{E} \left[ X \,\middle|\, X \leq -\text{VaR}_{\alpha} \right]
 $$
 
-### Copulas & Tail-dependences
+Where:
+
+- $X$: portfolio loss (random variable)
+- $\text{CVaR}_{\alpha}$: expected loss *given* that the loss has exceeded the $\text{VaR}_{\alpha}$ threshold
+
+Unlike VaR, which is a quantile, CVaR measures the **average loss in the tail**, providing a more coherent and conservative risk measure, especially under fat-tailed distributions.
 
 
 ---
