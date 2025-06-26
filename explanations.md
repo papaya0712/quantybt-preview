@@ -43,7 +43,7 @@ Where:
 ---
 
 # Montecarlo Simulation
-### Why?
+## Why?
 Using Monte Carlo methods gives you a better understanding of real risks in your trading system. In general we rely here on the **Weak Law of Large Numbers (WLLN)** and the **Central Limit Theorem (CLT)** from probability theory:
 
 ### Weak Law of Large Numbers (WLLN)
@@ -67,13 +67,13 @@ Although the strict i.i.d. assumptions are violated, empirical evidence often sh
 ---
 
 # Walkfoward Optimization and Generalization loss
-### Why ?
+## Why ?
 
 Relying on a single train-test split where you optimize your hyperparameters on in-sample data (train fold) and evaluate on out-of-sample data (test fold) is better than nothing, but still prone to overfitting.
 
 A more robust approach is **Walkforward Optimization**, where you use a rolling (or anchored) train/test window. This generates multiple smaller train-test splits across the entire dataset, providing a more reliable estimate of generalization performance and robustness.
 
-One step further is using a **Generalization loss function** which acts as penalty for massive underperfromance on unseend data and prevents even more overfitting. There are many different ways to define your GL-function. One for example:
+One step further is using a **Generalization loss function** which comes from machine-learning training and acts as penalty for massive underperfromance on unseend data and prevents even more overfitting. There are many different ways to define your GL-function. One for example:
 
 $$
 \text{Loss} = -\overline{\text{ValMetric}} + \beta \cdot \frac{\max(\text{GL})}{\text{scale}}
@@ -85,6 +85,18 @@ This penalizes sharp degradation between in-sample and out-of-sample performance
 
 
 
+# Risk
+## Motivation   
+
+For more serious algorithmic trading you should look at more risk metrics than sharpe and max drawdown. so here are a few useful and essential metrics:
+
+### VaR 
+
+
+### CVaR
+
+
+### Copulas & Tail-dependences
 
 
 ---

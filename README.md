@@ -470,9 +470,14 @@ In June 2022, the collapse of the Terra-Luna ecosystem triggered widespread dele
 
 Despite these events, the portfolio recovered rapidly, underlining its resilience and structural robustness.
 
-But what if our portfolio only did so well because of the early top performance back in 2020-2021 ? 
-For that it is important to remove those outlier years, no one wants to trade a portfolio which did only because of one historical year well.
-For that we can use another function from our `EqualWeightPortfolio`, the `.run_by_year()` function which shows us annual metrics for each year compared to our benchmark asset.  
+But what if the portfolio’s strong overall performance is mainly driven by early gains in 2020–2021?
+
+To test this, we remove those outlier years. After all, no one wants to rely on a strategy that only performed well in a single historic bull market.
+
+To evaluate year-over-year robustness, we use the `.run_by_year()` function provided by `EqualWeightedPortfolio`. This method calculates annual metrics—such as return, max drawdown, and Sortino ratio—for each calendar year and compares them to our benchmark asset.
+
+This allows us to assess whether the strategy delivers consistent, risk-adjusted performance over time or if results are concentrated in just a few exceptional periods.
+
 
 ```python
 df_yearly = ewp.run_by_year(freq='1d', remove_years=[])  
