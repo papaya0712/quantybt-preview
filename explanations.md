@@ -92,6 +92,9 @@ For more serious algorithmic trading you should look at more risk metrics than s
 
 ### VaR 
 
+$$
+\text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P
+$$
 
 ### CVaR
 
