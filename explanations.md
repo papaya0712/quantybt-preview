@@ -90,14 +90,17 @@ This penalizes sharp degradation between in-sample and out-of-sample performance
 
 For more serious algorithmic trading you should look at more risk metrics than sharpe and max drawdown. so here are a few useful and essential metrics:
 
-### VaR 
+### Value at Risk (VaR)
 
 $$
 \text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P
 $$
 
-### CVaR
+### Conditional Value at Risk (CVaR)
 
+$$
+\text{CVaR}_{\alpha} = \mathbb{E} \left[ X \,\middle|\, X \leq -\text{VaR}_{\alpha} \right]
+$$
 
 ### Copulas & Tail-dependences
 
