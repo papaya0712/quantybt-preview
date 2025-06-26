@@ -92,9 +92,7 @@ For more serious algorithmic trading you should look at more risk metrics than s
 
 ### Value at Risk (VaR)
 
-$$
-\text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P
-$$
+<pre> ```latex % Value at Risk (VaR) \[ \text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P \] % Conditional Value at Risk (CVaR) \[ \text{CVaR}_{\alpha} = \mathbb{E} \left[ X \,\middle|\, X \leq -\text{VaR}_{\alpha} \right] \] ``` </pre>
 
 ### Conditional Value at Risk (CVaR)
 
