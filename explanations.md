@@ -84,6 +84,7 @@ $$
 This penalizes sharp degradation between in-sample and out-of-sample performance, especially when it’s unstable over recent evaluations.
 
 
+---
 
 # Risk
 ## Motivation   
@@ -93,7 +94,7 @@ For more serious algorithmic trading you should look at more risk metrics than s
 ### Value at Risk (VaR)
 
 $$
-\text{VaR}_{\alpha} = z_{\alpha} \cdot \sigma_P
+\text{CVaR}_{\alpha} = \mathbb{E}[X \,|\, X \leq -\text{VaR}_{\alpha}]
 $$
 
 Where:
