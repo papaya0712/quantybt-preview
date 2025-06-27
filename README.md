@@ -518,23 +518,24 @@ This implies a much higher efficiency per unit of risk taken. While absolute ret
 Assuming linear growth and no compounding, both return and drawdown scale proportionally with leverage, enabling controlled amplification of performance under risk-aware constraints.
 
 ---
-## Live update
+## Live Update
 
-As mentioned above, for this portfolio (when not compounding), leverage is recommended if one does not want to be outperformed by a simple buy-and-hold approach using ETFs.
+As mentioned above, for this portfolio (when not compounding), leverage is recommended to avoid underperformance relative to a simple buy-and-hold approach using ETFs.
 
-📈 Portfolio Performance
+### 📈 Portfolio Performance
 
-| Metric                              | Portfolio        | Benchmark (Equal-Weighted) |
-|-------------------------------------|------------------|-----------------------------|
-| Return                              | **22.15 %**      | -11.86 %                    |
-| Max Drawdown (relative)             | **5.18 %**       | 48.01 %                     |
-| Sortino Ratio                       | **5.52**         | -0.08                       |
+| Metric                  | Portfolio        | Benchmark (Equal-Weighted) |
+|-------------------------|------------------|-----------------------------|
+| Return                  | **22.15 %**      | -11.86 %                    |
+| Max Drawdown (relative) | **5.18 %**       | 48.01 %                     |
+| Sortino Ratio           | **5.52**         | -0.08                       |
 
+The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH, and SOL — i.e. all traded assets.
 
 ![Portfolio Update](imgs/update.png)
 
-Note: A portion of the performance includes trades from the final OOS fold prior to live deployment.
-Signals and execution logic are identical to live trading, with average live slippage at ~0.0027 % per trade
+> **Note:** A portion of the performance includes trades from the final out-of-sample fold prior to live deployment.  
+> Signals and execution logic are identical to live trading.  
+> Average observed slippage is ~0.0027 % per trade 
 
-'''
-
+---
