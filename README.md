@@ -452,7 +452,6 @@ Sharpe                    2.86
 Sortino                   4.11
 Calmar                    6.26
 CVaR_95_pct               2.49
-Empirical_CVaR_95_pct     0.03
 
 ```
 ![Backtest Plot](imgs/img_ewp.png)
