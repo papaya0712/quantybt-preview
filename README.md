@@ -452,7 +452,6 @@ Sharpe                    2.86
 Sortino                   4.11
 Calmar                    6.26
 CVaR_95_pct               2.49
-
 ```
 ![Backtest Plot](imgs/img_ewp.png)
 
@@ -517,3 +516,20 @@ In comparison, Bitcoin's historical annual return ranges from ~37% to 70%, but t
 This implies a much higher efficiency per unit of risk taken. While absolute returns may appear lower, the drawdown profile allows for the use of **moderate leverage** without exposing the portfolio to the extreme tail risks typical for unhedged crypto holdings.
 
 Assuming linear growth and no compounding, both return and drawdown scale proportionally with leverage, enabling controlled amplification of performance under risk-aware constraints.
+
+---
+## Live update
+
+As mentioned above, for this portfolio (when not compounding), leverage is recommended if one does not want to be outperformed by a simple buy-and-hold approach using ETFs.
+
+'''text
+Portfolio Retur:                     22.15 %
+Portfolio Max Drawdown (relativ):    5.18 %
+Portfolio Sortino:                   5.52
+
+Benchmark Return (Equal-Weighted):  -11.86 %
+Benchmark Max Drawdown:              48.01 %
+Benchmark Sortino:                  -0.08
+
+
+'''
