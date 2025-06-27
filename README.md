@@ -155,8 +155,9 @@ analyzer = Analyzer(
     full_data  = df,  
     timeframe  = '15m',
     initial_capital=1000,
+    fixed_pos_size = None,            # -> 100% reinvest
     price_col  = 'close',   
-    fees       = 0.0002,
+    fees       = 0.0002,              # -> limit-order fees on bybit
     sl_stop    = params['sl_pct'])
 
 print(analyzer.stats())
@@ -522,7 +523,8 @@ Assuming linear growth and no compounding, both return and drawdown scale propor
 
 As mentioned above, for this portfolio (when not compounding), leverage is recommended (and used) to avoid underperformance relative to a simple buy-and-hold approach using ETFs.
 
-### 📈 Portfolio Performance
+
+### Portfolio Performance
 
 | Metric                  | Portfolio (5x lev) |  Benchmark (Equal-Weighted) |
 |-------------------------|--------------------|-----------------------------|
