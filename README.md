@@ -523,13 +523,13 @@ Assuming linear growth and no compounding, both return and drawdown scale propor
 As mentioned above, for this portfolio (when not compounding), leverage is recommended if one does not want to be outperformed by a simple buy-and-hold approach using ETFs.
 
 '''text
-Portfolio Retur:                     22.15 %
-Portfolio Max Drawdown (relativ):    5.18 %
-Portfolio Sortino:                   5.52
+📈 Portfolio Performance
 
-Benchmark Return (Equal-Weighted):  -11.86 %
-Benchmark Max Drawdown:              48.01 %
-Benchmark Sortino:                  -0.08
-
+| Metric                              | Portfolio        | Benchmark (Equal-Weighted) |
+|-------------------------------------|------------------|-----------------------------|
+| Return                              | **22.15 %**      | -11.86 %                    |
+| Max Drawdown (relative)             | **5.18 %**       | 48.01 %                     |
+| Sortino Ratio                       | **5.52**         | -0.08                       |
 
 '''
+
