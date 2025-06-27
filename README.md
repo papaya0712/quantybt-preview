@@ -520,17 +520,17 @@ Assuming linear growth and no compounding, both return and drawdown scale propor
 ---
 ## Live Update
 
-As mentioned above, for this portfolio (when not compounding), leverage is recommended to avoid underperformance relative to a simple buy-and-hold approach using ETFs.
+As mentioned above, for this portfolio (when not compounding), leverage is recommended (and used) to avoid underperformance relative to a simple buy-and-hold approach using ETFs.
 
 ### 📈 Portfolio Performance
 
-| Metric                  | Portfolio        | Benchmark (Equal-Weighted) |
-|-------------------------|------------------|-----------------------------|
-| Return                  | **22.15 %**      | -11.86 %                    |
-| Max Drawdown (relative) | **5.18 %**       | 48.01 %                     |
-| Sortino Ratio           | **5.52**         | -0.08                       |
+| Metric                  | Portfolio (5x lev) |  Benchmark (Equal-Weighted) |
+|-------------------------|--------------------|-----------------------------|
+| Return                  | **22.15 %**        | -11.86 %                    |
+| Max Drawdown (relative) | **5.18 %**         | 48.01 %                     |
+| Sortino Ratio           | **5.52**           | -0.08                       |
 
-The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH, and SOL — i.e. all traded assets.
+The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH, and SOL (i.e. all traded assets) 
 
 ![Portfolio Update](imgs/update.png)
 
