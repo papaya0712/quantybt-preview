@@ -83,6 +83,5 @@ $$
 
 This penalizes sharp degradation between in-sample and out-of-sample performance, especially when it’s unstable over recent evaluations.
 
-
 ---
 
