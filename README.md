@@ -538,4 +538,7 @@ The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH
 > Signals and execution logic are identical to live trading.  
 > Average observed slippage is ~0.0027 % per trade 
 
+Live signals execute exactly as in backtest, with no observed drift or divergence so far.
+
+Thanks for reading
 ---
