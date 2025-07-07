@@ -535,10 +535,11 @@ The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH
 
 ![Portfolio Update](imgs/update.png)
 
-> **Note:** A portion of the performance includes trades from the final out-of-sample fold prior to live deployment.  
-> Signals and execution logic are identical to live trading.  
-> Average observed slippage is ~0.0017 % per trade 
-> the observed drift between ideal backtest and live performance is ~ 0.07% (based on realized PnL and after removing debugging artefacts)
+> **Note:**       
+> - A portion of the performance includes trades from the final out-of-sample fold prior to live deployment.  
+> - Signals and execution logic are identical to live trading.  
+> - Average observed slippage is ~0.0017 % per trade 
+> - the observed drift between ideal backtest and live performance is ~ 0.07% (based on realized PnL and after removing debugging artefacts)
 
 Order execution in the live environment has so far closely matched the backtest model, with no meaningful deviation in fills or trade timing
 
