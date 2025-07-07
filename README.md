@@ -528,8 +528,8 @@ As mentioned above, for this portfolio (when not compounding), leverage is recom
 | Metric                  | Portfolio (4x lev) |  Benchmark (Equal-Weighted) |
 |-------------------------|--------------------|-----------------------------|
 | Return                  | **17.87 %**        | -10.28 %                    |
-| Max Drawdown (relative) | **5.28 %**         | 48.01 %                     |
-| Sortino Ratio           | **2.53**           | 0.01                       |
+| Max Drawdown (relative) | **5.28 %**         |  48.01 %                    |
+| Sortino Ratio           | **2.53**           |  0.01                       |
 
 The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH, and SOL (i.e. all traded assets) 
 
@@ -538,6 +538,7 @@ The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH
 > **Note:** A portion of the performance includes trades from the final out-of-sample fold prior to live deployment.  
 > Signals and execution logic are identical to live trading.  
 > Average observed slippage is ~0.0017 % per trade 
+> the observed drift between ideal backtest and live performance is ~ 0.07% (based on realized PnL and after removing debugging artefacts)
 
 Order execution in the live environment has so far closely matched the backtest model, with no meaningful deviation in fills or trade timing
 
