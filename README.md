@@ -75,7 +75,7 @@ All rights reserved
 
 ---
 
-## Define ur strategy
+## Define your strategy
 
 ```python
 import pandas as pd
@@ -451,7 +451,6 @@ AnnualizedReturn_pct     96.47
 max_drawdown_pct          6.24
 Sharpe                    2.86
 Sortino                   4.11
-Calmar                    6.26
 CVaR_95_pct               2.49
 ```
 ![Backtest Plot](imgs/img_ewp.png)
