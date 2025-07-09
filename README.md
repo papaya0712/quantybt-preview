@@ -511,7 +511,7 @@ After excluding the extreme bull market years 2020 and 2021, we obtain a more re
 - **Max Drawdown:** ~2.7%  
 - **Sortino Ratio:** ~2.3
 
-In comparison, Bitcoin's historical annual return ranges from ~37% to 70%, but this comes with an average max drawdown between 35% and 40%. Our portfolio exhibits significantly lower downside risk, achieving similar or superior risk-adjusted returns.
+In comparison, Bitcoin's historical annual return ranges from ~37% to 70%, but this comes with an average max drawdown between 35% and 40%. Our portfolio exhibits significantly lower downside risk, achieving superior risk-adjusted returns.
 
 This implies a much higher efficiency per unit of risk taken. While absolute returns may appear lower, the drawdown profile allows for the use of **moderate leverage** without exposing the portfolio to the extreme tail risks typical for unhedged crypto holdings.
 
