@@ -371,17 +371,17 @@ The optional but strongly recommended permutation function:
 ```python
 oos_returns = wfo.get_oos_returns()
 orig_sharpe, p_val, dist = wfo.permutation_test(
-    n_sims=500,
+    n_sims=2000,
     max_evals_per_perm=50,
     seed=123,
     n_jobs=-1
-    )
+)
 
 print(f"Original Sharpe: {orig_sharpe:.4f} | p-value: {p_val:.4f}")
 
 ```
 ```text
-Original Sharpe: 1.81 | p-value: 0.0100
+Original Sharpe: 1.4024 | p-value: 0.0060
 ```
 ![Portfolio Update](imgs/perm_wfo.png)
 
