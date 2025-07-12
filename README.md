@@ -381,7 +381,7 @@ print(f"Original Sharpe: {orig_sharpe:.4f} | p-value: {p_val:.4f}")
 
 ```
 ```text
-Original Sharpe: 1.6043 | p-value: 0.0100
+Original Sharpe: 1.81 | p-value: 0.0100
 ```
 ![Portfolio Update](imgs/perm_wfo.png)
 
