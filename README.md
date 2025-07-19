@@ -1,6 +1,6 @@
 # QuantyBT 🪐
 
-## This is a preview version, the framework itself is closed source yet. For full access, please reach out to me so I can add you to the orginal repository.
+## This is a preview version, the framework itself is closed source yet. For full access, please reach out to me.
 
 **A framework for quantitative backtesting and portfolio optimization. Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader. Combines the flexibility of Python with the performance of Rust to deliver fast and reliable backtests**
 
