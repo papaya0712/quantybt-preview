@@ -34,7 +34,7 @@
   Second Monte Carlo simulation engine for detecting data mining bias
 
 - **LocalSensitivityAnalyzer**  
-  Uses finite-difference-style perturbations to quickly screen for unstable or sensitive parameters.  
+  Uses simple perturbations to quickly screen for unstable or sensitive parameters.  
 
 - **GlobalSensitivityAnalyzer**  
   Performs full grid search across 2D parameter space for global insight into strategy behavior.   
