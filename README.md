@@ -526,7 +526,7 @@ As mentioned above, for this portfolio (when not compounding), leverage is recom
 
 ### Portfolio Performance
 
-| Metric                  | Portfolio (4x lev) |  Benchmark (Equal-Weighted) |
+| Metric                  | Portfolio (2x lev) |  Benchmark (Equal-Weighted) |
 |-------------------------|--------------------|-----------------------------|
 | Return                  | **17.87 %**        | -10.28 %                    |
 | Max Drawdown (relative) | **5.28 %**         |  48.01 %                    |
