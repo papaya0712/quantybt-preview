@@ -1,0 +1,17 @@
+PRIVATE USE ONLY LICENSE
+
+Copyright (c) 2025 Niklas Schlütter
+
+This software is licensed for private, personal use only by authorized individuals.
+
+PROHIBITED:
+- Commercial use of any kind
+- Redistribution or sharing outside this authorized group
+- Public display or performance
+- Reverse engineering
+
+PERMITTED:
+- Modification and contribution by authorized collaborators
+- Internal collaboration within this private repository
+
+All rights reserved.

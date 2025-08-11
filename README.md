@@ -6,6 +6,11 @@
 
 ---
 
+## License
+[LICENSE](license.txt)
+
+---
+
 ## Current Features
 
 ### Strategy Modules
@@ -43,15 +48,16 @@
 
 ### Portfolio Modules
 
-- **CorrelationAnalyzer**  
-   Calculates Pearson, Spearman, Kendall-Tau and **Copula-Tail-Dependence** correlations.
+- **CorrelationAnalyzer**   
+   Calculates asset dependency metrics, including:   
+   - Linear and rank correlations (Pearson, Spearman, Kendall-Tau)  
+   - Copula-based tail dependence (for modeling nonlinear extreme-risk co-movements)  
 
-- **EqualWeightPortfolio**  
-   Naive 1/n allocation model for aggregated strategy returns, ideal for small portfolios < 5 strategies. 
-   Computes **CVaR** on global, rolling and empirical (via Bootstrapping) basis
+- **PortfolioAnalyzer**  
+   Simulates portfolio performance using backtested trade records and state vectors. Key features:   
+   - Supports weighting strategies (Equal Weight, Inverse Volatility, and custom models)   
+   - Built-in sensitivity analysis via grid search and Monte Carlo simulations   
 
-- **Hierarchical Risk Parity (Planned)**   
-   allocation algorithm that clusters strategies based on statistical distance and recursively allocates risk to reduce overexposure to correlated groups
 
 ---
 
@@ -63,15 +69,6 @@
  
 - **features**  
   file with useful functions for e.g. feature-engineering 
-
-
-
----
-
-## License 
-Copyright (c) 2025 [Niklas Schlütter / papaya0712]     
-
-All rights reserved
 
 ---
 
@@ -231,30 +228,7 @@ bt.plot(btr)
 ![Backtest Plot](imgs/img_bt.png)
 
 ---
-## Montecarlo Simulation - Permutation
 
-- **`analyzer`**: The already defined analyzer instance, as shown above.
-- **`n_sims`**: Total number of simulations. Due to much higher computational costs aim for at least 500 simulations
-
-The smaller the p-value, the less likely it is that the strategy’s performance is due to chance. The null hypothesis states: "The strategy has no genuine edge, its performance could be replicated on a randomly permuted price series"
-
-```python
-from quantybt.strategy.montecarlo import Permutation
-
-pt = Permutation(analyzer, n_sims=500)
-ptr = pt.run()
-pt.plot(ptr)
-```
-```text
-Running Permutation Test…
-Permutations done: 100%|██████████| 250/250 [12:57<00:00,  3.11s/it]
-
-Sharpe p-value: 0.0040
-Sortino p-value: 0.0040
-```
-![Backtest Plot](imgs/img_perm.png)
-
----
 ## Strategy Optimization - AdvancedOptimizer
 
 While most Puplic frameworks do not even support robust parameter optimization and if they do, then only simple train-test splits which are prone to overfitting, this framework offers a more advanced option when it comes to optimizing your parameters without overfitting your system.
@@ -288,7 +262,6 @@ wfo = AdvancedOptimizer(
     bootstrap_seed   = 69,                      # Seed for reproducibility
     verbose          = True                     # Enable verbose logging of fold-level results
 )
-
 
 best_params, trials = wfo.optimize()
 results = wfo.evaluate()
@@ -386,164 +359,103 @@ Original Sharpe: 1.4024 | p-value: 0.0060
 ![Portfolio Update](imgs/perm_wfo.png)
 
 ---
-## Portfolio Simulation - CorrelationAnalyzer   
-
-Use the .export_trades() function from your defined `Analyzer` classes, along with their corresponding benchmark time series, to analyze your portfolio’s correlations and tail risks.
-
-Note: The CorrelationAnalyzer plots arithmetic equity curves (i.e. without compounding effects), which do not affect the computed correlations.
+## Portfolio Simulation - EqualWeightPortfolio
 
 ```python
 
-from quantybt.portfolio.correlation import CorrelationAnalyzer
+from quantybt.portfolio import PortfolioAnalyzer
+from quantybt.portfolio.sizing import InverseVolatility
 
-trade_sources = {
-    'BTC_01': {
-        'trades': r'C:\Desktop\quantybt\records\01_BTC_1_records_trades.feather',
-        'df': r'C:\Desktop\quantybt\data\BTCUSDT_15m.feather'
-    },
-    'ETH_02': {
-        'trades': r'C:\Desktop\quantybt\records\03_ETH_1_records_trades.feather',
-        'df': r'C:\Desktop\quantybt\data\ETHUSDT_15m.feather'
-    },
-    'SOL_03': {
-        'trades': r'C:\Desktop\quantybt\records\04_SOL_1_records_trades.feather',
-        'df': r'C:\Desktop\quantybt\data\SOLUSDT_1h.feather'
-    }
+trades = {
+    'BTC1': r"C:\Users\quantybt\records\01_BTC_1_trades.feather",
+    'ETH1': r"C:\Users\quantybt\records\02_ETH_1_trades.feather",
+    'SOL1': r"C:\Users\quantybt\records\03_SOL_1_trades.feather",
 }
 
-sca = CorrelationAnalyzer(trade_sources=trade_sources)
-results_sca = sca.run()
-print(results_sca["pearson_corr_active"])
+states = {
+    'BTC1': r"C:\Users\quantybt\records\01_BTC_1_statevector.feather",
+    'ETH1': r"C:\Users\quantybt\records\02_ETH_1_statevector.feather",
+    'SOL1': r"C:\Users\quantybt\records\03_SOL_1_statevector.feather",
+}
+
+    
+pf = PortfolioAnalyzer(
+        trade_paths=trades,
+        statevector_paths=states,
+        initial_capital=10_000,
+        compounding=True,
+        freq='4h', 
+        start_date="2019-01-01",
+        end_date="2026-01-01",
+        logging_level="WARNING",  
+    )
+    
+weights = InverseVolatility(window=6*90, normalize=True, target_leverage=1)
+result_df = pf.run(portfolio=weights, leverage=1.0, rebalancing_cost_rate=0.0006)
+
+pf.stats()
+pf.plot(log_scale=True, beta_window=6*90, CVaR_window=6*90)
+
+```
+```text
+
+Metric                 Portfolio    Benchmark
+-------------------  -----------  -----------
+Total Return %           2332.07      2530.82
+CAGR %                     77.3         77.73
+Annual Volatility %        27.98        81.86
+Max Drawdown %             32.76        81.38
+Ulcer Index                 7.94        45.76
+Sharpe                      2.18         1.11
+Sortino                     5.01         1.56
+
+```
+![Backtest Plot](imgs/img_ewp.png)
+
+---
+## Portfolio Simulation - CorrelationAnalyzer   
+
+Use both trades- and statevector records as before to analyze your portfolio’s correlations and tail dependences.
+
+```python
+
+from quantybt.portfolio import CorrelationAnalyzer
+
+ca = CorrelationAnalyzer(trades, states)
+ca_results = ca.run(lookback_window=90)
+ 
+ca.stats()
+ca.plot()
 
 
 ```
 
 ```text
-Loaded 3 strategies: ['BTC_01', 'ETH_02', 'SOL_03']
-          
-        BTC_01  ETH_03  SOL_04
-BTC_01    1.00    0.08    0.00
-ETH_03    0.08    1.00    0.04
-SOL_04    0.00    0.04    1.00
+
+WARNING:__main__:May non-stationary: ETH2, ADF p=0.0000, KPSS p=0.0484
+
+Pearson Correlation Matrix
+|      |   BTC1 |   ETH1 |   SOL1 |   ETH2 |
+|------|--------|--------|--------|--------|
+| BTC1 |   1    |   0.29 |   0.1  |   0.33 |
+| ETH1 |   0.29 |   1    |   0.09 |   0.77 |
+| SOL1 |   0.1  |   0.09 |   1    |   0.13 |
+| ETH2 |   0.33 |   0.77 |   0.13 |   1    |
+
+Global Correlations
+| Method   |   Correlation |
+|----------|---------------|
+| pearson  |          0.29 |
+| spearman |          0.25 |
+| kendall  |          0.22 |
+
+Copula λ
+| Copula Type   |   Mean λ |
+|---------------|----------|
+| Clayton λ     |     0.29 |
+| Gumbel λ      |     0.45 |
 
 ```
 ![Backtest Plot](imgs/img_corr.png)
 
-
----
-## Portfolio Simulation - EqualWeightPortfolio
-
-```python
-ewp = EqualWeightedPortfolio(trade_sources=trade_sources,
-                             compounding=False, 
-                             benchmark_path=r"C:\Desktop\quantybt\data\BTCUSDT_1d.feather",
-                             benchmark_compounding=True,
-                             )
-
-results_ewp = ewp.run(freq='1d')
-print(results_ewp)
-ewp.plot()
-
-```
-```text
-                         Value
-total_return_pct        544.34
-AnnualizedReturn_pct     96.47
-max_drawdown_pct          6.24
-Sharpe                    2.86
-Sortino                   4.11
-CVaR_95_pct               2.49
-```
-![Backtest Plot](imgs/img_ewp.png)
-
-These results highlight key patterns in the portfolio’s behavior:
-
-1. Rapid portfolio growth during the 2020–2021 bull market.
-2. Two distinct short-term drawdown spikes:  
-   – April 2020 (COVID-19 crash)  
-   – June 2022 (Terra-Luna collapse)
-
-Both events are explainable in the context of broader market disruptions.  
-In April 2020, Bitcoin dropped nearly 50% within days due to the global COVID-19 shock.  
-In June 2022, the collapse of the Terra-Luna ecosystem triggered widespread deleveraging and panic across the crypto market.
-
-Despite these events, the portfolio recovered rapidly, underlining its resilience and structural robustness.
-
-But what if the portfolio’s strong overall performance is mainly driven by early gains in 2020–2021?
-
-To test this, we remove those outlier years. After all, no one wants to rely on a strategy that only performed well in a single historic bull market.
-
-To evaluate year-over-year robustness, we use the `.run_by_year()` function provided by `EqualWeightedPortfolio`. This method calculates annual metrics—such as return, max drawdown, and Sortino ratio—for each calendar year and compares them to our benchmark asset.
-
-This allows us to assess whether the strategy delivers consistent, risk-adjusted performance over time or if results are concentrated in just a few exceptional periods.
-
-
-```python
-df_yearly = ewp.run_by_year(freq='1d', remove_years=[])  
-print(df_yearly)
-
-```
-
-```text
-                          2019    2020    2021    2022    2023    2024   2025    AVG
-portfolio_return_pct     -2.70  107.18  115.09    1.81   22.67    9.12   4.34  36.79
-portfolio_max_dd_pct      2.84    6.24    3.38    5.94    2.02    1.46   1.30   3.31
-portfolio_sortino        -0.08    4.11    7.64    0.36    5.16    3.01   3.12   3.33
-benchmark_return_pct    -23.64  302.24   57.52  -65.33  154.75  111.50   8.55  77.94
-benchmark_max_dd_pct     29.70   54.00   53.22   66.94   20.01   26.26  28.10  39.75
-benchmark_sortino        -2.78    2.05    1.03   -1.24    2.91    1.93   0.69   0.66
-
-```
-after removing:
-```text
-
-                          2019   2022   2023   2024   2025    AVG
-portfolio_return_pct     -2.70   1.81  22.67   9.12   4.34   7.05
-portfolio_max_dd_pct      2.84   5.94   2.02   1.46   1.30   2.71
-portfolio_sortino        -0.08   0.36   5.16   3.01   3.12   2.31
-benchmark_return_pct    -23.64 -65.33 154.75 111.50   8.55  37.17
-benchmark_max_dd_pct     29.70  66.94  20.01  26.26  28.10  34.20
-benchmark_sortino        -2.78  -1.24   2.91   1.93   0.69   0.30
-```
-
-After excluding the extreme bull market years 2020 and 2021, we obtain a more realistic picture of portfolio performance under typical market conditions:
-
-- **Annualized Return:** ~7.05%  
-- **Max Drawdown:** ~2.7%  
-- **Sortino Ratio:** ~2.3
-
-In comparison, Bitcoin's historical annual return ranges from ~37% to 70%, but this comes with an average max drawdown between 35% and 40%. Our portfolio exhibits significantly lower downside risk, achieving superior risk-adjusted returns.
-
-This implies a much higher efficiency per unit of risk taken. While absolute returns may appear lower, the drawdown profile allows for the use of **moderate leverage** without exposing the portfolio to the extreme tail risks typical for unhedged crypto holdings.
-
-Assuming linear growth and no compounding, both return and drawdown scale proportionally with leverage, enabling controlled amplification of performance under risk-aware constraints.
-
----
-## Live Update
-
-As mentioned above, for this portfolio (when not compounding), leverage is recommended (and used) to avoid underperformance relative to a simple buy-and-hold approach using ETFs.
-
-
-### Portfolio Performance
-
-| Metric                  | Portfolio (2x lev) |  Benchmark (Equal-Weighted) |
-|-------------------------|--------------------|-----------------------------|
-| Return                  | **17.87 %**        | -10.28 %                    |
-| Max Drawdown (relative) | **5.28 %**         |  48.01 %                    |
-| Sortino Ratio           | **2.53**           |  0.01                       |
-
-The benchmark is an equal-weighted (1/3 each) buy-and-hold portfolio of BTC, ETH, and SOL (i.e. all traded assets) 
-
-![Portfolio Update](imgs/update.png)
-
-> **Note:**       
-> - A portion of the performance includes trades from the final out-of-sample fold prior to live deployment.  
-> - Signals and execution logic are identical to live trading.  
-> - Average observed slippage is ~0.0017 % per trade 
-> - the observed drift between ideal backtest and live performance is ~ 0.07% (based on realized PnL and after removing debugging artefacts)
-
-Order execution in the live environment has so far closely matched the backtest model, with no meaningful deviation in fills or trade timing
-
----
-Thanks for reading
 ---
