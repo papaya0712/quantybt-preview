@@ -1,6 +1,6 @@
 # QuantyBT 🪐
 
-## This is a preview version, the framework itself is closed source yet. For full access, please reach out to me.
+## This is a preview version, the framework itself is closed source yet.
 
 **A framework for quantitative backtesting and portfolio optimization. Focused on statistical robustness, modularity, and seamless integration of strategies, models, and crypto-native data loader. Combines the flexibility of Python with the performance of Rust to deliver fast and reliable backtests**
 
@@ -28,8 +28,8 @@
   Key features:   
   – Clean **rolling walkforward split logic** with warmup gap  
   – A built-in **generalization loss penalty** to dynamically penalize overfit parameter sets  
-  – Integrated **Monte Carlo bootstrapping** per out-of-sample fold for confidence intervals (Sharpe)  
-  – WFO **permutation testing** to detect potential data mining bias in your evaluation process 
+  – Integrated **Monte Carlo bootstrapping** per out-of-sample fold for confidence intervals   
+  – Two WFO **permutation testing** on aggregated OOS-folds to detect potential data mining  bias in your strategy and evaluation process 
   
 - **Bootstrapping**  
   Monte Carlo simulation engine for risk estimation and statistical robustness.  
